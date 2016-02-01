@@ -3,8 +3,12 @@
 // Custom script goes here.
 //////////////////////////////////////////////////
 
+// Place all your Javascript code inside this "document ready" function so
+// it does not run until the DOM is ready for Javascript manipulation.
+
 $( document ).ready(function() {
-    var userInfo = {
+  'use strict';
+    var user = {
         firstName: 'Jane',
         lastName: 'Doe'
     };
@@ -13,40 +17,82 @@ $( document ).ready(function() {
         greatest: 0,
         total: 0
     };
-    // Place all your Javascript code inside this "document ready" function so
-    // it does not run until the DOM is ready for Javascript manipulation.
-
-    // TODO: Create a function to listen for clicks on the "login" button.
-    //      1. When a user clicks the "login" button, hide the login
-    //          form elements on the page.
+  
+     //TODO: Create a function to listen for clicks on the "login" button.
+     // $ ('.user-button').on('click', function(event) {
+     //   console.log(event);
+     //   var userInfo = $ ('.user-info');
+     //   var loginForm = $ ('#login-form');
+     // //      1. When a user clicks the "login" button, hide the login
+     // //      form elements on the page.
+     //   if ($(userInfo).is(':visible')) {
+     //       $ (userInfo).fadeOut();
+     //       $ (loginForm).show();
+     //   } else {
+     //     $ (loginForm).fadeIn();
+     //     $ (userInfo).hide();
+     //   }
+     // });
+    
+      $ ('.login-button').on('click', function(event) {                //    hides login on click
+         console.log(event);
+         var userInfo = $ ('.user-info');
+         var loginForm = $ ('#login-form');
+       //      1. When a user clicks the "login" button, hide the login
+       //      form elements on the page.
+         if ($(loginForm).is(':visible')) {
+             $ (loginForm).fadeOut(100);
+             $ (userInfo).show();
+         } 
+       });
+  
+     $ ('.logout-button').on('click', function(event) {                 //    hides logout on click
+       console.log(event);
+       var userInfo = $ ('.user-info');
+       var loginForm = $ ('#login-form');
+       //      2. Fill the user's first and last name into `div.user-info`.
+       //      (NOTE: You do not have to perform any validation on the data as
+       //          a base requirement.)
+       if ($(userInfo).is(':visible')) {
+           $ ('.user-fullname').html(user.lastName + " " + user.firstName);
+           $ (userInfo).fadeOut(100);
+           $ (loginForm).show();
+       } 
+     });
+    
     //      2. Fill the user's first and last name into `div.user-info`.
     //      (NOTE: You do not have to perform any validation on the data as
     //          a base requirement.)
-
+    
 
     // TODO: Create a function to listen for clicks on all the "View Details"
     // buttons so that when a user clicks a "View Details" button they see
     // the content contained in the elements with the class "details" in the
     // proper part of the screen.
+    
+                                                                  //    1. When user clicks a "view details" button, 
+                                                                  //    find the parent of that element.
     $ ('.view-details').on('click' , function(event) {
       console.log(event);
       var targetElement = event.target;
-      //      1. When user clicks a "view details" button, find the parent of that element.
-      var container = targetElement.parentElement.parentElement; //TODO use multiplier 
+      var container = targetElement.parentElement.parentElement;  //    TODO use multiplier 
+                                                                  //    2. Within that parent, find all the elements that 
+                                                                  //    have the class `details`.
       $ (container).find('.details').each( function(index, el) {
+                                                                  //    3. Toggle visibility of all the elements within that 
+                                                                  //    parent with the class `details`.
           if ($(el).is(':visible')) {
             $(el).fadeOut();
             targetElement.innerHTML = "View Details"
+                                                                  //     4. Change the text of the "view details" button 
+                                                                  //     to read "hide details" so the user
+                                                                  //     understands they can hide the text again.
           } else {
             $(el).fadeIn();
             targetElement.innerHTML = "Hide Details"
           }
       });
      });
-    //      2. Within that parent, find all the elements that have the class `details`.
-    //      3. Toggle visibility of all the elements within that parent with the class `details`.
-    //      4. Change the text of the "view details" button to read "hide details" so the user
-    //          understands they can hide the text again.
 
     // TODO: Create a function that listens for clicks on the voting buttons and
     // looks at the `data-vote` attribute on each button to see what was voted for,
