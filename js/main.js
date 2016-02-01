@@ -54,15 +54,12 @@ $( document ).ready(function() {
        //      (NOTE: You do not have to perform any validation on the data as
        //          a base requirement.)
        if ($(userInfo).is(':visible')) {
-           $ ('.user-fullname').html(user.lastName + " " + user.firstName);
+           $ ('.user-fullname').html(" "+user.lastName + " " + user.firstName);
            $ (userInfo).fadeOut(100);
            $ (loginForm).show();
        } 
      });
-    
-    //      2. Fill the user's first and last name into `div.user-info`.
-    //      (NOTE: You do not have to perform any validation on the data as
-    //          a base requirement.)
+
     
 
     // TODO: Create a function to listen for clicks on all the "View Details"
