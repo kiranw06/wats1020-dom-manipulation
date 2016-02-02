@@ -15,7 +15,7 @@ $( document ).ready(function() {
     var voteCounts = {
         great: 0,
         greatest: 0,
-        total: 0
+        total: 0,
     };
   
      //TODO: Create a function to listen for clicks on the "login" button.
@@ -98,27 +98,25 @@ $( document ).ready(function() {
     // TODO: Create a function that listens for clicks on the voting buttons and
     // looks at the `data-vote` attribute on each button to see what was voted for,
     // then determines the updated vote breakdown to adjust the progress bars.
-    //      1. Set up an event listener on the buttons with the `vote` class.
+                                                                          //      1. Set up an event listener on the buttons with the `vote` class.
     $ ('.vote').on('click' , function(event) {
-        console.log(event);
-        var greatButton = $(['data-vote="great"'])
-        var greatest = $(['data-vote="greatest"'])
-     //      2. When a button is clicked, look at the `data-vote` attribute to determine
-     //      what the user is voting for ("great" or "greatest").
-        var totalVotes = $ ('.vote').on('click', function(event) {
-          voteCounts.total + 1;
-          console.log(voteCounts.total + 1);
-        });
-      });
-                                        
-       // if ($ (greatButton).click()) {
-       // //      3. Increment the counter for whichever vote talley is affected.
-       //   (voteCounts.great + 1)/100;
-       // } else if ($ (greatestButton).click()) {
-       // //      3. Increment the counter for whichever vote talley is affected.
-       //  (voteCounts.greatest + 1)/100;
-       // }
-  
-    //      5. Modify the `width` attribute on each progress bar to set the updated percentage.
-
+        var greatButton = $(this).data == $('.great');                    //      2. When a button is clicked, look at the `data-vote` attribute to 
+        var greatestButton = $(this).data == $('.greatest');              //      determine what the user is voting for ("great" or "greatest").
+    
+        var totalVotes = voteCounts.total++;                              //      3. Increment the counter for whichever vote talley is affected.
+        var greatestVotes = voteCounts.greatest + 1;
+        var greatVotes = voteCounts.great + 1;
+      
+        console.log(totalVotes);
+          if ($(greatButton)) {
+            var greatPercent = (greatVotes/totalVotes)* 100;
+            console.log(greatPercent);
+            $ ('.great-progress').css({"width":greatPercent + "%"});        //      4. Determine the respective percentages (out of 100) for each progress bar.
+          } 
+          if ($(greatestButton)) {
+            var greatestPercent = (greatestVotes/totalVotes)* 100;
+            console.log(greatestPercent);
+           $ ('.greatest-progress').css({"width":greatestPercent + "%"});   //      5. Modify the `width` attribute on each progress bar to set the updated percentage.
+          }
+    });
 });
