@@ -41,6 +41,10 @@ $( document ).ready(function() {
        //      1. When a user clicks the "login" button, hide the login
        //      form elements on the page.
          if ($(loginForm).is(':visible')) {
+       //      2. Fill the user's first and last name into `div.user-info`.
+       //      (NOTE: You do not have to perform any validation on the data as
+       //      a base requirement.)
+             $ ('.user-fullname').html(" " + user.lastName + " " + user.firstName);
              $ (loginForm).fadeOut(100);
              $ (userInfo).show();
          } 
@@ -50,16 +54,16 @@ $( document ).ready(function() {
        console.log(event);
        var userInfo = $ ('.user-info');
        var loginForm = $ ('#login-form');
-       //      2. Fill the user's first and last name into `div.user-info`.
-       //      (NOTE: You do not have to perform any validation on the data as
-       //          a base requirement.)
+   
        if ($(userInfo).is(':visible')) {
-           $ ('.user-fullname').html(" "+user.lastName + " " + user.firstName);
            $ (userInfo).fadeOut(100);
            $ (loginForm).show();
        } 
      });
-
+    
+    //      2. Fill the user's first and last name into `div.user-info`.
+    //      (NOTE: You do not have to perform any validation on the data as
+    //          a base requirement.)
     
 
     // TODO: Create a function to listen for clicks on all the "View Details"
@@ -95,10 +99,26 @@ $( document ).ready(function() {
     // looks at the `data-vote` attribute on each button to see what was voted for,
     // then determines the updated vote breakdown to adjust the progress bars.
     //      1. Set up an event listener on the buttons with the `vote` class.
-    //      2. When a button is clicked, look at the `data-vote` attribute to determine
-    //          what the user is voting for ("great" or "greatest").
-    //      3. Increment the counter for whichever vote talley is affected.
-    //      4. Determine the respective percentages (out of 100) for each progress bar.
+    $ ('.vote').on('click' , function(event) {
+        console.log(event);
+        var greatButton = $(['data-vote="great"'])
+        var greatest = $(['data-vote="greatest"'])
+     //      2. When a button is clicked, look at the `data-vote` attribute to determine
+     //      what the user is voting for ("great" or "greatest").
+        var totalVotes = $ ('.vote').on('click', function(event) {
+          voteCounts.total + 1;
+          console.log(voteCounts.total + 1);
+        });
+      });
+                                        
+       // if ($ (greatButton).click()) {
+       // //      3. Increment the counter for whichever vote talley is affected.
+       //   (voteCounts.great + 1)/100;
+       // } else if ($ (greatestButton).click()) {
+       // //      3. Increment the counter for whichever vote talley is affected.
+       //  (voteCounts.greatest + 1)/100;
+       // }
+  
     //      5. Modify the `width` attribute on each progress bar to set the updated percentage.
 
 });
